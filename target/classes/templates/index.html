@@ -1,0 +1,264 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Flight Search</title>-->
+<!--</head>-->
+<!--<style>-->
+<!--    body {-->
+<!--    background-color: #0f1b0f;-->
+<!--    color: #e0e0e0;-->
+<!--    font-family: Arial, sans-serif;-->
+<!--    display: flex;-->
+<!--    flex-direction: column;-->
+<!--    align-items: center;-->
+<!--    justify-content: center;-->
+<!--    min-height: 100vh;-->
+<!--}-->
+
+<!--form {-->
+<!--    margin: 20px 0;-->
+<!--}-->
+
+<!--label {-->
+<!--    display: block;-->
+<!--    margin-bottom: 5px;-->
+<!--    font-weight: bold;-->
+<!--}-->
+
+<!--select, button {-->
+<!--    background-color: #1c2d1c;-->
+<!--    color: #e0e0e0;-->
+<!--    border: none;-->
+<!--    padding: 10px;-->
+<!--    margin-bottom: 15px;-->
+<!--    width: 200px;-->
+<!--}-->
+
+<!--button {-->
+<!--    background-color: #23a78b;-->
+<!--    cursor: pointer;-->
+<!--}-->
+
+<!--button:hover {-->
+<!--    background-color: #1e937a;-->
+<!--}-->
+
+<!--.results {-->
+<!--    display: flex;-->
+<!--    gap: 20px;-->
+<!--}-->
+
+<!--.card {-->
+<!--    background-color: #1c2d1c;-->
+<!--    padding: 20px;-->
+<!--    border-radius: 10px;-->
+<!--    width: 200px;-->
+<!--    text-align: center;-->
+<!--}-->
+
+<!--.card p {-->
+<!--    margin: 10px 0;-->
+<!--}-->
+
+<!--.card .logo {-->
+<!--    height: 50px;-->
+<!--    width: auto;-->
+<!--    margin-bottom: 10px;-->
+<!--}-->
+
+<!--.card .miles {-->
+<!--    font-size: 24px;-->
+<!--    font-weight: bold;-->
+<!--    color: #23a78b;-->
+<!--}-->
+
+<!--</style>-->
+<!--<body>-->
+<!--<h1>Flight Search</h1>-->
+<!--<form action="#" th:action="@{/search}" method="post">-->
+<!--    <label for="origin">Origin:</label>-->
+<!--    <select name="origin" id="origin">-->
+<!--        <option value="JFK">JFK</option>-->
+<!--        <option value="DEL">DEL</option>-->
+<!--        <option value="SYD">SYD</option>-->
+<!--        <option value="BOM">BOM</option>-->
+<!--        <option value="BNE">BNE</option>-->
+<!--        <option value="BLR">BLR</option>-->
+<!--    </select><br>-->
+
+<!--    <label for="destination">Destination:</label>-->
+<!--    <select name="destination" id="destination">-->
+<!--        <option value="JFK">JFK</option>-->
+<!--        <option value="DEL">DEL</option>-->
+<!--        <option value="SYD">SYD</option>-->
+<!--        <option value="LHR">LHR</option>-->
+<!--        <option value="CDG">CDG</option>-->
+<!--        <option value="DOH">DOH</option>-->
+<!--        <option value="SIN">SIN</option>-->
+<!--    </select><br>-->
+
+<!--    <label for="cabin">Cabin:</label>-->
+<!--    <select name="cabin" id="cabin">-->
+<!--        <option value="Economy">Economy</option>-->
+<!--        <option value="Business">Business</option>-->
+<!--        <option value="First">First</option>-->
+<!--    </select><br>-->
+
+<!--    <button type="submit">Search</button>-->
+<!--</form>-->
+
+<!--<h2>Results:</h2>-->
+<!--<div class="result" th:if="${data != null}">-->
+<!--    <div class="card" th:each="item : ${data}">-->
+<!--        <p>Partner Program: <span th:text="${item.partner_program}"></span></p>-->
+<!--        <p class="miles">Economy Miles: <span th:text="${item.min_economy_miles}"></span></p>-->
+<!--        <p>Economy Tax: <span th:text="${item.min_economy_tax}"></span></p>-->
+<!--        <p class="miles">Business Miles: <span th:text="${item.min_business_miles}"></span></p>-->
+<!--        <p>Business Tax: <span th:text="${item.min_business_tax}"></span></p>-->
+<!--        <p class="miles">First Miles: <span th:text="${item.min_first_miles}"></span></p>-->
+<!--        <p>First Tax: <span th:text="${item.min_first_tax}"></span></p>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<p th:if="${data == null || #lists.isEmpty(data)}">Try another search route.</p>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Flight Search</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<style>
+    body {
+    background-color: #101C16;
+    color: #EAEAEA;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: #EAEAEA;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+label {
+    margin-top: 10px;
+    color: #EAEAEA;
+}
+
+select {
+    background-color: #333;
+    color: #EAEAEA;
+    border: none;
+    padding: 10px;
+    margin-top: 5px;
+    width: 200px;
+}
+
+button {
+    background-color: #00ADB5;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #028090;
+}
+
+.results {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card {
+    background-color: #1E392A;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 200px;
+    color: #EAEAEA;
+}
+
+.card img {
+    width: 50px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 5px 0;
+}
+
+.n-a {
+    color: #FF6F61;
+}
+
+</style>
+<body>
+<h1>Flight Search</h1>
+<form action="#" th:action="@{/search}" method="post">
+    <label for="origin">Origin:</label>
+    <select id="origin" name="origin">
+        <option value="SYD">SYD</option>
+        <option value="JFK">JFK</option>
+        <option value="DEL">DEL</option>
+        <option value="BOM">BOM</option>
+        <option value="BNE">BNE</option>
+        <option value="BLR">BLR</option>
+    </select>
+
+    <label for="destination">Destination:</label>
+    <select id="destination" name="destination">
+        <option value="JFK">JFK</option>
+        <option value="DEL">DEL</option>
+        <option value="SYD">SYD</option>
+        <option value="LHR">LHR</option>
+        <option value="CDG">CDG</option>
+        <option value="DOH">DOH</option>
+        <option value="SIN">SIN</option>
+    </select>
+
+    <label for="cabin">Cabin Selection:</label>
+    <select id="cabin" name="cabin">
+        <option value="Economy">Economy</option>
+        <option value="Business">Business</option>
+        <option value="First">First</option>
+    </select>
+
+    <button type="submit">Search</button>
+</form>
+
+<div class="results" th:if="${data != null}">
+    <div class="card" th:each="item : ${data}">
+        <img src="logo.png" alt="logo">
+        <p th:text="${item.partner_program}"></p>
+        <p th:text="'SYD ➔ JFK'"></p>
+        <p th:text="'2024-07-09 - 2024-10-07'"></p>
+        <p class="n-a" th:text="${item.min_business_miles == null ? 'N/A Min Business Miles' : item.min_business_miles + ' Min Business Miles'}"></p>
+        <p th:text="${item.min_economy_miles + ' + $' + item.min_economy_tax + ' Min Economy Miles'}"></p>
+        <p class="n-a" th:text="${item.min_first_miles == null ? 'N/A Min First Miles' : item.min_first_miles + ' Min First Miles'}"></p>
+    </div>
+</div>
+<p th:if="${data == null || #lists.isEmpty(data)}">Try another search route.</p>
+</body>
+</html>
